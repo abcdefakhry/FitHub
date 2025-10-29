@@ -7,7 +7,7 @@ body {
     background-color: #1a1a1a; /* Latar belakang gelap */
     color: #fff;
     overflow: hidden; /* Mencegah scroll di body */
-    height: 100vh;
+    height: 100dvh;
 }
 
 /* Class untuk menyembunyikan halaman */
@@ -409,3 +409,4 @@ body {
         max-width: 90%;
     }
 }
+
