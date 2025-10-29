@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-    // === BAGIAN 1: PENGELOLAAN ELEMEN ===
     
     // Halaman & Kontrol Tampilan
     const loginPage = document.getElementById('login-page');
@@ -14,10 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const userInput = document.getElementById('user-input');
     const sendBtn = document.getElementById('send-btn');
     
-    // === BAGIAN 2: STATE & KONFIGURASI ===
-    
-    // !! GANTI INI DENGAN URL RENDER.COM ANDA JIKA SUDAH DEPLOY !!
-    // JANGAN GUNAKAN LOCALHOST JIKA SUDAH DI-UPLOAD
     const chatApiUrl = 'https://fithub-production-26e2.up.railway.app/chat'; 
     
     let onboardingState = 'IDLE';
@@ -36,8 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
         goal: null 
     };
 
-    // === BAGIAN 3: DEFINISI FUNGSI ===
-
     const startOnboarding = () => {
         chatBox.innerHTML = ''; // Selalu bersihkan chat saat mulai
         onboardingState = 'ASKING_NAME';
@@ -54,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         let content = '';
        if (message.text) {
+           
         // Mengubah barDetails
         let processedText = message.text
             .replace(/\*/g, '') 
@@ -76,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
         chatBox.scrollTop = chatBox.scrollHeight;
     };
 
-    // --- FUNGSI HELPER BARU UNTUK VALIDASI ---
     const isValidNumber = (input) => {
         const num = parseFloat(input);
         return !isNaN(num) && num > 0;
@@ -87,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return /^[a-zA-Z\s]+$/.test(input);
     };
 
-    // FUNGSI Untuk menghitung dan mengkategorikan BMI ---
+    // Fungsi Untuk menghitung dan mengkategorikan BMI
     const getBmiCategory = (bmi) => {
         if (bmi < 18.5) return 'Kurang berat badan';
         if (bmi >= 18.5 && bmi <= 24.9) return 'Berat badan normal';
@@ -95,9 +87,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return 'Obesitas';
     };
 
-    // --- FUNGSI UNTUK LOGIKA USIA ---
+    // Fungsi Logika Usia
     const requestInitialRecommendation = () => {
-        // --- LOGIKA BARU BERDASARKAN USIA ---
+        // Logika Baru Berdasarkan Usia
         const age = parseInt(userData.age);
         let ageSpecificInstruction = ''; // Variabel untuk instruksi tambahan
 
@@ -110,7 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } else { // Di atas 60 tahun
             ageSpecificInstruction = "Pengguna berusia di atas 60 tahun. Fokus utama adalah pada keseimbangan untuk mencegah jatuh, kekuatan fungsional untuk aktivitas sehari-hari, dan mobilitas sendi. Semua latihan harus low-impact dan aman.";
         }
-        // --- AKHIR LOGIKA USIA ---
 
         const fullProfilePrompt = `
             Halo AI. Saya adalah pengguna baru. Tolong buatkan saya rencana kebugaran awal yang sangat dipersonalisasi berdasarkan data lengkap saya berikut ini:
@@ -136,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         handleGeneralQuery(fullProfilePrompt, false); 
     };
 
-    // --- LOGIKA UTAMA ONBOARDING ---
+    // Logika Utama Onboarding
     const advanceOnboarding = (userResponse) => {
         switch (onboardingState) {
             case 'ASKING_NAME':
@@ -265,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- FUNGSI PANGGILAN API ---
+    // Fungsi Panggilan API
     const handleGeneralQuery = async (messageText, displayUserMessage = true) => {
         if (displayUserMessage) {
             addMessage({ text: messageText }, 'user');
@@ -305,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- FUNGSI INPUT PENGGUNA ---
+    // Fungsi Input Pengguna
     const handleUserInput = () => {
         const messageText = userInput.value.trim();
         if (messageText === '') return;
@@ -318,16 +309,14 @@ document.addEventListener('DOMContentLoaded', () => {
             handleGeneralQuery(messageText);
         }
     };
-
-    // === BAGIAN 4: EVENT LISTENERS ===
     
-    // ** LOGIKA PINDAH DARI LOGIN -> SPLASH (INSTAN) **
+    // Logika Pindah Dari Login -> Splash
     loginBtn.addEventListener('click', () => {
         loginPage.classList.add('hidden'); // Sembunyikan Login
         splashScreen.classList.add('active'); // Langsung Tampilkan Splash
     });
 
-    // ** LOGIKA PINDAH DARI SPLASH -> CHAT (INSTAN) **
+    // Logika Pindah Dari Splash -> Chat
     openChatBtn.addEventListener('click', () => {
         splashScreen.classList.add('hidden'); // Sembunyikan Splash
         splashScreen.classList.remove('active'); // Hapus class active juga
@@ -368,4 +357,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
 
