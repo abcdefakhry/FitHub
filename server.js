@@ -40,6 +40,11 @@ const chat = model.startChat({
   },
 });
 
+// Health Check Route untuk Railway
+app.get('/', (req, res) => {
+  res.status(200).send('FitBot Server is running!');
+});
+
 // Buat endpoint untuk chat
 app.post('/chat', async (req, res) => {
   try {
@@ -62,4 +67,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server berjalan di http://localhost:${PORT}`);
 });
+
 
