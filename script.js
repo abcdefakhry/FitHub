@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // !! GANTI INI DENGAN URL RENDER.COM ANDA JIKA SUDAH DEPLOY !!
     // JANGAN GUNAKAN LOCALHOST JIKA SUDAH DI-UPLOAD
-    const chatApiUrl = 'http://localhost:3000/chat'; 
+    const chatApiUrl = 'fithub-production-26e2.up.railway.app'; 
     
     let onboardingState = 'IDLE';
     
@@ -366,4 +366,5 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => advanceOnboarding(value), 200); 
         }
     });
+
 });
